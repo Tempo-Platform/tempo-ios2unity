@@ -8,11 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		0D68933E2B7D9CE3002EADFD /* tempo_ios2unity.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D68933D2B7D9CE3002EADFD /* tempo_ios2unity.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0D6893452B7D9D16002EADFD /* UnityBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6893442B7D9D16002EADFD /* UnityBridge.swift */; };
+		0D6893472B7D9D31002EADFD /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6893462B7D9D31002EADFD /* Profile.swift */; };
+		0D6893492B7D9DFD002EADFD /* UnityBridgeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6893482B7D9DFD002EADFD /* UnityBridgeController.swift */; };
+		0D68934B2B7DBC60002EADFD /* BridgeRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D68934A2B7DBC60002EADFD /* BridgeRef.swift */; };
+		0D68934D2B7DC23B002EADFD /* BridgeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D68934C2B7DC23B002EADFD /* BridgeUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0D68933A2B7D9CE3002EADFD /* tempo_ios2unity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = tempo_ios2unity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D68933D2B7D9CE3002EADFD /* tempo_ios2unity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tempo_ios2unity.h; sourceTree = "<group>"; };
+		0D6893442B7D9D16002EADFD /* UnityBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnityBridge.swift; sourceTree = "<group>"; };
+		0D6893462B7D9D31002EADFD /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		0D6893482B7D9DFD002EADFD /* UnityBridgeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnityBridgeController.swift; sourceTree = "<group>"; };
+		0D68934A2B7DBC60002EADFD /* BridgeRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeRef.swift; sourceTree = "<group>"; };
+		0D68934C2B7DC23B002EADFD /* BridgeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +56,11 @@
 			isa = PBXGroup;
 			children = (
 				0D68933D2B7D9CE3002EADFD /* tempo_ios2unity.h */,
+				0D6893442B7D9D16002EADFD /* UnityBridge.swift */,
+				0D6893482B7D9DFD002EADFD /* UnityBridgeController.swift */,
+				0D6893462B7D9D31002EADFD /* Profile.swift */,
+				0D68934A2B7DBC60002EADFD /* BridgeRef.swift */,
+				0D68934C2B7DC23B002EADFD /* BridgeUtils.swift */,
 			);
 			path = "tempo-ios2unity";
 			sourceTree = "<group>";
@@ -93,6 +108,7 @@
 				TargetAttributes = {
 					0D6893392B7D9CE3002EADFD = {
 						CreatedOnToolsVersion = 15.2;
+						LastSwiftMigration = 1520;
 					};
 				};
 			};
@@ -129,6 +145,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D68934B2B7DBC60002EADFD /* BridgeRef.swift in Sources */,
+				0D6893492B7D9DFD002EADFD /* UnityBridgeController.swift in Sources */,
+				0D6893452B7D9D16002EADFD /* UnityBridge.swift in Sources */,
+				0D68934D2B7DC23B002EADFD /* BridgeUtils.swift in Sources */,
+				0D6893472B7D9D31002EADFD /* Profile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +284,7 @@
 		0D6893422B7D9CE3002EADFD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -285,6 +307,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -293,6 +316,7 @@
 		0D6893432B7D9CE3002EADFD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
