@@ -40,7 +40,7 @@ public class UnityBridgeController: NSObject
             print("Error: sendSomethingToUnity is nil")
         }
         
-        let consentValue = BridgeRef.LocationConsent.NONE.rawValue //"hell2" // 
+        let consentValue = BridgeRef.LocationConsent.NONE.rawValue //"hell2" //
         if let onConsentTypeConfirmed = bridge?.onConsentTypeConfirmed {
             print("⚡️ consent => \(String(describing: charPointerConverter(consentValue)))")
             onConsentTypeConfirmed(charPointerConverter(consentValue), 69)
@@ -49,7 +49,10 @@ public class UnityBridgeController: NSObject
             print("Error: onConsentTypeConfirmed is nil")
         }
         
-        //profile?.sendConsentUpdateToUnity(lc: BridgeRef.LocationConsent.NONE)
+        DispatchQueue.global().async {
+            
+            self.profile?.sendConsentUpdateToUnity(lc: BridgeRef.LocationConsent.NONE)
+        }
     }
     
     func convertStringtoCChar(myPerfectlyGoodString: String) -> [CChar] {
@@ -72,7 +75,7 @@ public class UnityBridgeController: NSObject
         profile?.doTaskAfterLocAuthUpdate(completion: nil)
     }
     
-    private func charPointerConverter(_ paramString: String) -> UnsafePointer<CChar>? {
+    public func charPointerConverter(_ paramString: String) -> UnsafePointer<CChar>? {
         return paramString.withCString { cString in
             guard let duplicatedString = strdup(cString) else {
                 return nil

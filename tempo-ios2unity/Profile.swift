@@ -73,12 +73,12 @@ public class Profile: NSObject, CLLocationManagerDelegate {
         
     
     public func sendConsentUpdateToUnity(lc: BridgeRef.LocationConsent) {
+        let rawValue = lc.rawValue
         if let onConsentTypeConfirmed = bridge.onConsentTypeConfirmed {
-            print("onConsentTypeConfirmed sending... \(lc.rawValue)")
+            print("onConsentTypeConfirmed sending... \(rawValue)")
             //onConsentTypeConfirmed(locData.consent)
             //let consentValue = lc.rawValue
-            let consentValue = "hell2"
-            onConsentTypeConfirmed(UnsafePointer<CChar>?(consentValue), 69)
+            onConsentTypeConfirmed(bridge.charPointerConverter(rawValue), 69)
             print("Sent!")
         } else {
             print("Error: onConsentTypeConfirmed is nil")
