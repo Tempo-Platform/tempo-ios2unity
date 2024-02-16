@@ -10,8 +10,6 @@ import CoreLocation
 
 var bridgeController = UnityBridgeController()
 
-
-
 /* CALLOUTS */
 @_cdecl("initBridge")
 public func initBridge() {
@@ -55,8 +53,6 @@ public func set_OnInitDelegate(delegate: @convention(c) @escaping () -> Void) {
     bridgeController.onInit = delegate
 }
 
-
-
 @_cdecl("set_OnCountryCodeConfirmedDelegate")
 public func set_OnCountryCodeConfirmedDelegate(delegate: @convention(c) @escaping (UnsafePointer<CChar>?) -> Void) {
     bridgeController.onCountryCodeConfirmed = delegate
@@ -70,16 +66,11 @@ public func set_OnLocDataFailureDelegate(delegate: @convention(c) @escaping (Uns
     bridgeController.onLocDataFailure = delegate
 }
 
-
-
-
 @_cdecl("set_OnSomethingDelegate")
 public func set_OnSomethingDelegate(delegate: @convention(c) @escaping (UnsafePointer<CChar>?, Int) -> Void) {
-    print("🎁 set_OnSomethingDelegate done")
     bridgeController.onSomething = delegate
 }
 @_cdecl("set_OnConsentTypeConfirmedDelegate")
 public func set_OnConsentTypeConfirmedDelegate(delegate: @convention(c) @escaping (UnsafePointer<CChar>?, Int) -> Void) {
-    print("🎁 set_OnConsentTypeConfirmedDelegate done")
     bridgeController.onConsentTypeConfirmed = delegate
 }
