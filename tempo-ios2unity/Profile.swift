@@ -298,22 +298,22 @@ public class Profile: NSObject, CLLocationManagerDelegate {
     func locSuccess() {
         print("✅ Profile.locSuccess");
         
-//        let ld = locData
-//        if let onLocDataSuccess = bridge.onLocDataSuccess {
-//            onLocDataSuccess(ld.consent , ld.state , ld.postcode , ld.country_code , ld.postal_code , ld.admin_area , ld.sub_admin_area , ld.locality , ld.sub_locality)
-//            //onLocDataSuccess("", "", "", "", "", "", "", "", "")
-//            print("Sent!")
-//        } else {
-//            print("Error: onLocDataFailure is nil")
-//        }
-        //bridge.onLocDataSuccess?(ld.consent , ld.state , ld.postcode , ld.country_code , ld.postal_code , ld.admin_area , ld.sub_admin_area , ld.locality , ld.sub_locality );
+        let ld = locData
+        if let onLocDataSuccess = bridge.onLocDataSuccess {
+            onLocDataSuccess(ld.consent , ld.state , ld.postcode , ld.country_code , ld.postal_code , ld.admin_area , ld.sub_admin_area , ld.locality , ld.sub_locality)
+            //onLocDataSuccess("", "", "", "", "", "", "", "", "")
+            print("Sent!")
+        } else {
+            print("Error: onLocDataFailure is nil")
+        }
+        bridge.onLocDataSuccess?(ld.consent , ld.state , ld.postcode , ld.country_code , ld.postal_code , ld.admin_area , ld.sub_admin_area , ld.locality , ld.sub_locality );
     }
     
-    
+    // TODO: Needed anymore?
     func initWithValue(checkMe: String) -> String  {
         if checkMe.isEmpty {
             print("String is empty")
-            return "-"
+            return ""
         } else {
             print("String is not empty: \(checkMe)")
             return checkMe
@@ -322,24 +322,24 @@ public class Profile: NSObject, CLLocationManagerDelegate {
     
     func locFailure() {
         print("❌ Profiler.locFailure");
-//        let ld = locData
-//        let consent = initWithValue(checkMe: ld.consent)
-//        let state = initWithValue(checkMe: ld.state)
-//        let postcode = initWithValue(checkMe: ld.postcode)
-//        let country_code = initWithValue(checkMe: ld.country_code)
-//        let postal_code = initWithValue(checkMe: ld.postal_code)
-//        let admin_area = initWithValue(checkMe: ld.admin_area)
-//        let sub_admin_area = initWithValue(checkMe: ld.sub_admin_area)
-//        let locality = initWithValue(checkMe: ld.locality)
-//        let sub_locality = initWithValue(checkMe: ld.sub_locality)
-//    
-//        if let onLocDataFailure = bridge.onLocDataFailure {
-//            onLocDataFailure(consent, state, postcode, country_code, postal_code, admin_area, sub_admin_area, locality, sub_locality)
-//            //onLocDataFailure("", "", "", "", "", "", "", "", "")
-//            print("Sent!")
-//        } else {
-//            print("Error: onLocDataFailure is nil")
-//        }
+        let ld = locData
+        let consent = initWithValue(checkMe: ld.consent)
+        let state = initWithValue(checkMe: ld.state)
+        let postcode = initWithValue(checkMe: ld.postcode)
+        let country_code = initWithValue(checkMe: ld.country_code)
+        let postal_code = initWithValue(checkMe: ld.postal_code)
+        let admin_area = initWithValue(checkMe: ld.admin_area)
+        let sub_admin_area = initWithValue(checkMe: ld.sub_admin_area)
+        let locality = initWithValue(checkMe: ld.locality)
+        let sub_locality = initWithValue(checkMe: ld.sub_locality)
+    
+        if let onLocDataFailure = bridge.onLocDataFailure {
+            onLocDataFailure(consent, state, postcode, country_code, postal_code, admin_area, sub_admin_area, locality, sub_locality)
+            //onLocDataFailure("", "", "", "", "", "", "", "", "")
+            print("Sent!")
+        } else {
+            print("Error: onLocDataFailure is nil")
+        }
     }
     
     /// Location Manager callback: didUpdateLocations

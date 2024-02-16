@@ -13,8 +13,8 @@ public class UnityBridgeController: NSObject
     var onSomething: ((UnsafePointer<CChar>?, Int) -> Void)?
     var onConsentTypeConfirmed: ((UnsafePointer<CChar>?, Int) -> Void)?
     var onCountryCodeConfirmed: ((UnsafePointer<CChar>?) -> Void)?
-    var onLocDataSuccess: ((String, String, String, String, String, String, String, String, String) -> Void)?
-    var onLocDataFailure: ((String, String, String, String, String, String, String, String, String) -> Void)?
+    var onLocDataSuccess: ((UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?) -> Void)?
+    var onLocDataFailure: ((UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?) -> Void)?
     
     var profile: Profile?
     var bridge: UnityBridgeController?

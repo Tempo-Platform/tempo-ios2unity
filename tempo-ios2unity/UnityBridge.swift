@@ -62,11 +62,11 @@ public func set_OnCountryCodeConfirmedDelegate(delegate: @convention(c) @escapin
     bridgeController.onCountryCodeConfirmed = delegate
 }
 @_cdecl("set_OnLocDataSuccessDelegate")
-public func set_OnLocDataSuccessDelegate(delegate: @convention(c) @escaping (String, String, String, String, String, String, String, String, String) -> Void) {
+public func set_OnLocDataSuccessDelegate(delegate: @convention(c) @escaping (UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?) -> Void) {
     bridgeController.onLocDataSuccess = delegate
 }
 @_cdecl("set_OnLocDataFailureDelegate")
-public func set_OnLocDataFailureDelegate(delegate: @convention(c) @escaping (String, String, String, String, String, String, String, String, String) -> Void) {
+public func set_OnLocDataFailureDelegate(delegate: @convention(c) @escaping (UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?) -> Void) {
     bridgeController.onLocDataFailure = delegate
 }
 
