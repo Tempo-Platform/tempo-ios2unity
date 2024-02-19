@@ -1,10 +1,3 @@
-//
-//  CountryCode.swift
-//  tempo-ios2unity
-//
-//  Created by Stephen Baker on 19/2/2024.
-//
-
 import Foundation
 
 public class CountryCode {

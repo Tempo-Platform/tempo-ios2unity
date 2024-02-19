@@ -1,22 +1,15 @@
-//
-//  Profile.swift
-//  tempo-ios2unity
-//
-//  Created by Stephen Baker on 15/2/2024.
-//
-
 import Foundation
 import CoreLocation
 import AdSupport
 
 public class Profile: NSObject, CLLocationManagerDelegate {
     
-    let locManager = CLLocationManager() // This instance's location manager delegate
-    let requestOnLoad_testing = false // Make true to prompt location consent at runtime
-    var outputtingLocationInfo = true
-    var locationState: LocationState = LocationState.UNCHECKED
-    var locData: LocationData = LocationData(consent: BridgeRef.LocationConsent.NONE.rawValue)
-    let bridge: UnityBridgeController
+    let locManager = CLLocationManager() // this instance's location manager delegate
+    let requestOnLoad_testing = false // make true to prompt location consent at runtime
+    var outputtingLocationInfo = true // outputs additional info during runtime
+    var locationState: LocationState = LocationState.UNCHECKED // state of current request process
+    var locData: LocationData = LocationData(consent: BridgeRef.LocationConsent.NONE.rawValue) // holds all location properties
+    let bridge: UnityBridgeController // reference to platform mediator
     
     /// Initialiser constructor, sets up location config parameters
     init(bridgeController: UnityBridgeController) {
@@ -200,7 +193,7 @@ public class Profile: NSObject, CLLocationManagerDelegate {
     
     /* ---------- GET ---------- */
     /// Get CLAuthorizationStatus location consent value
-    private func getLocAuthStatus() -> CLAuthorizationStatus {
+    func getLocAuthStatus() -> CLAuthorizationStatus {
         var locationAuthorizationStatus : CLAuthorizationStatus
         if #available(iOS 14.0, *) {
             locationAuthorizationStatus =  locManager.authorizationStatus
@@ -279,7 +272,7 @@ public class Profile: NSObject, CLLocationManagerDelegate {
     }
     
     /// Manually call for a location data (will trigger consent request if not confirmed yet!) TODO: Not sure what this actually is????
-    private func requestLocationWithChecks() {
+    func requestLocationWithChecks() {
         if(locationState != .CHECKING) {
             updateLocState(newState: .CHECKING)
             locManager.requestLocation()

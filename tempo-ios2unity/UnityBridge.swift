@@ -3,21 +3,11 @@ import CoreLocation
 
 var bridgeController = UnityBridgeController()
 
-/* CALLOUTS */
+/* FROM UNITY */
 @_cdecl("initBridge")
 public func initBridge() {
     // create bridge controller
     bridgeController.initBridge(bridgeController: bridgeController)
-}
-
-@_cdecl("checkPrecise")
-public func checkPrecise() {
-    // TODO: call 'checkPrecise' to initiate device geocheck
-}
-
-@_cdecl("checkGeneral")
-public func checkGeneral() {
-    // TODO: call 'checkGeneral' to initiate device geocheck
 }
 
 @_cdecl("createProfile") 
@@ -27,8 +17,8 @@ public func createProfile() {
 }
 
 @_cdecl("sendSomethingToUnity")
-public func sendSomethingToUnity(someInt: Int) {
-    bridgeController.sendSomethingToUnity(someInt: someInt)
+public func sendSomethingToUnity(someString: UnsafePointer<CChar>?, someInt: Int) {
+    bridgeController.sendSomethingToUnity(someString: someString, someInt: someInt)
 }
 
 @_cdecl("requestLocationConsent")
@@ -38,10 +28,9 @@ public func requestLocationConsent() {
     locationManager.requestWhenInUseAuthorization()
 }
 
-/* DELEGATES */
+/* TO UNITY (DELEGATES) */
 @_cdecl("set_OnInitDelegate")
 public func set_OnInitDelegate(delegate: @convention(c) @escaping () -> Void) {
-    //bridgeController?.onInit = delegate
     bridgeController.onInit = delegate
 }
 
@@ -70,6 +59,19 @@ public func set_OnLocDataFailureDelegate(delegate: @convention(c) @escaping (Uns
     bridgeController.onLocDataFailure = delegate
 }
 
+
+/* TEST TO */
+@_cdecl("checkPrecise")
+public func checkPrecise() {
+    // TODO: call 'checkPrecise' to initiate device geocheck
+}
+
+@_cdecl("checkGeneral")
+public func checkGeneral() {
+    // TODO: call 'checkGeneral' to initiate device geocheck
+}
+
+/* TEST FROM */
 @_cdecl("set_OnSomethingDelegate")
 public func set_OnSomethingDelegate(delegate: @convention(c) @escaping (UnsafePointer<CChar>?, Int) -> Void) {
     bridgeController.onSomething = delegate
