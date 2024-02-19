@@ -7,38 +7,23 @@
 
 import Foundation
 import CoreLocation
+import AdSupport
 
 public class Profile: NSObject, CLLocationManagerDelegate {
     
-    // This instance's location manager delegate
-    let locManager = CLLocationManager()
-    let requestOnLoad_testing = false
-    //let adView: TempoAdView
-    
-    // The static that can be retrieved at any time during the SDK's usage
-    static var outputtingLocationInfo = true
-    static var locationState: LocationState = LocationState.UNCHECKED
+    let locManager = CLLocationManager() // This instance's location manager delegate
+    let requestOnLoad_testing = false // Make true to prompt location consent at runtime
+    var outputtingLocationInfo = true
+    var locationState: LocationState = LocationState.UNCHECKED
     var locData: LocationData = LocationData(consent: BridgeRef.LocationConsent.NONE.rawValue)
+    let bridge: UnityBridgeController
     
-    //let bridge: UnityBridgeController
-    var bridge: UnityBridgeController
-    
+    /// Initialiser constructor, sets up location config parameters
     init(bridgeController: UnityBridgeController) {
         print("💥 Profile.init()")
+        
         bridge = bridgeController
-        
         super.init()
-        
-        // TODO: BACKUPS
-        // Update locData with backup if nil
-        //        if(locData == nil) {
-        //            locData = TempoDataBackup.getMostRecentLocationData()
-        //        } else {
-        //            BridgeUtils.Say(msg: "🌏 LocData is null, no backup needed")
-        //        }
-        
-        Profile.updateLocState(newState: LocationState.UNCHECKED)
-        print("⏰ Profile.currentState: \(Profile.locationState.rawValue)")
         
         // Assign manager delegate
         locManager.delegate = self
@@ -51,41 +36,9 @@ public class Profile: NSObject, CLLocationManagerDelegate {
             requestLocationWithChecks()
         }
     }
+
     
-     /// Updates the fetching state of location data
-     public static func updateLocState(newState: LocationState) {
-         Profile.locationState = newState
-         
-         if(Profile.outputtingLocationInfo) {
-             BridgeUtils.Say(msg: "🗣️ Updated location state to: \(newState.rawValue)")
-         }
-     }
-    
-    /// TODO -------------
-    private func requestLocationWithChecks() {
-        if(Profile.locationState != .CHECKING) {
-            Profile.updateLocState(newState: .CHECKING)
-            locManager.requestLocation()
-        }
-        else {
-            BridgeUtils.Say(msg: "Ignoring request location as LocationState == CHECKING")
-        }
-    }
-        
-    
-    public func sendConsentUpdateToUnity(lc: BridgeRef.LocationConsent) {
-        let rawValue = lc.rawValue
-        if let onConsentTypeConfirmed = bridge.onConsentTypeConfirmed {
-            print("onConsentTypeConfirmed sending... \(rawValue)")
-            //onConsentTypeConfirmed(locData.consent)
-            //let consentValue = lc.rawValue
-            onConsentTypeConfirmed(BridgeUtils.charPointerConverter(rawValue), 69)
-            print("Sent!")
-        } else {
-            print("Error: onConsentTypeConfirmed is nil")
-        }
-    }
-    
+    /* ---------- Task  ---------- */
     /// Runs async thread process that gets authorization type/accuray and updates LocationData when received
     public func doTaskAfterLocAuthUpdate(completion: (() -> Void)?) {
         print("💥 Profile.doTaskAfterLocAuthUpdate()")
@@ -102,6 +55,7 @@ public class Profile: NSObject, CLLocationManagerDelegate {
                 switch (authStatus) {
                 case .authorizedAlways, .authorizedWhenInUse: // TODO: auth always might not work
                     BridgeUtils.Say(msg: "✅ Access - always or authorizedWhenInUse [UPDATE] \(completion == nil ? "No completion task given" : "")")
+                    self.locData = self.loadLastValidLocData()
                     
                     if #available(iOS 14.0, *) {
                         
@@ -137,35 +91,37 @@ public class Profile: NSObject, CLLocationManagerDelegate {
                     
                 case .restricted, .denied:
                     BridgeUtils.Warn(msg: "⛔️ No access - restricted or denied [UPDATE]")
-                    
-                    // Need to update latest valid consent as confirmed NONE
-                    self.locData = LocationData(consent: BridgeRef.LocationConsent.NONE.rawValue)
-                    Profile.updateLocState(newState: LocationState.UNAVAILABLE)
-                    
-                    // Update Unity
-                    //self.sendConsentUpdateToUnity(lc: BridgeRef.LocationConsent.NONE)
-                    self.locFailure()
-                    
-                    // Save and run completion
-                    self.saveLatestValidLocData()
-                    completion?()
-                    return
+//                    
+//                    // Need to update latest valid consent as confirmed NONE
+//                    self.locData = LocationData(consent: BridgeRef.LocationConsent.NONE.rawValue)
+//                    self.updateLocState(newState: LocationState.UNAVAILABLE)
+//                    
+//                    // Update Unity
+//                    //self.sendConsentUpdateToUnity(lc: BridgeRef.LocationConsent.NONE)
+//                    self.locFailure()
+//                    
+//                    // Save and run completion
+//                    self.saveValidLocData()
+//                    completion?()
+//                    return
+                    break
                     
                 case .notDetermined:
                     BridgeUtils.Warn(msg: "⛔️ No access - notDetermined [UPDATE]")
-                    
-                    // Need to update latest valid consent as confirmed NONE
-                    self.locData = LocationData(consent: BridgeRef.LocationConsent.NONE.rawValue)
-                    Profile.updateLocState(newState: LocationState.UNAVAILABLE)
-                    
-                    // Update Unity
-                    self.sendConsentUpdateToUnity(lc: BridgeRef.LocationConsent.NONE)
-                    self.locFailure()
-                    
-                    // Save and run completion
-                    self.saveLatestValidLocData()
-                    completion?()
-                    return
+//                    
+//                    // Need to update latest valid consent as confirmed NONE
+//                    self.locData = LocationData(consent: BridgeRef.LocationConsent.NONE.rawValue)
+//                    self.updateLocState(newState: LocationState.UNAVAILABLE)
+//                    
+//                    // Update Unity
+//                    self.sendConsentUpdateToUnity(lc: BridgeRef.LocationConsent.NONE)
+//                    self.locFailure()
+//                    
+//                    // Save and run completion
+//                    self.saveValidLocData()
+//                    completion?()
+//                    return
+                    break
                 @unknown default:
                     BridgeUtils.Warn(msg: "⛔️ Unknown authorization status [UPDATE]")
                 }
@@ -175,18 +131,74 @@ public class Profile: NSObject, CLLocationManagerDelegate {
             
             // Need to update latest valid consent as confirmed NONE
             self.locData = LocationData(consent: BridgeRef.LocationConsent.NONE.rawValue)
-            Profile.updateLocState(newState: LocationState.UNAVAILABLE)
+            self.updateLocState(newState: LocationState.UNAVAILABLE)
             
             // Update Unity
             self.sendConsentUpdateToUnity(lc: BridgeRef.LocationConsent.NONE)
             self.locFailure()
             
-            // Close and run completion
+            // Save and run completion
+            self.saveValidLocData()
             completion?()
             
         }
     }
     
+    /// Sends latest LocData values when a successful up-to-date check has been done
+    func locSuccess() {
+        print("✅ Profile.locSuccess");
+        let ld = locData
+        if let onLocDataSuccess = bridge.onLocDataSuccess {
+            onLocDataSuccess(ld.consent , ld.state , ld.postcode , ld.country_code , ld.postal_code , ld.admin_area , ld.sub_admin_area , ld.locality , ld.sub_locality)
+            print("Profile.locSuccess() - SENT consent=\(ld.consent)")
+        } else {
+            print("Error: onLocDataSuccess is nil")
+        }
+    }
+    
+    /// Sends latest LocData values when an up-to-date check has failed - will rely on previous record (or NONE if default)
+    func locFailure() {
+        print("❌ Profile.locFailure");
+        let ld = locData
+        if let onLocDataFailure = bridge.onLocDataFailure {
+            onLocDataFailure(ld.consent , ld.state , ld.postcode , ld.country_code , ld.postal_code , ld.admin_area , ld.sub_admin_area , ld.locality , ld.sub_locality)
+            print("Profile.locFailure() - SENT consent=\(ld.consent)")
+        } else {
+            print("Error: onLocDataFailure is nil")
+        }
+    }
+    
+    /// Save instance of LocationData
+    private func saveValidLocData() {
+        // Save the instance to UserDefaults
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(locData) {
+            let defaults = UserDefaults.standard
+            defaults.set(encoded, forKey: BridgeRef.LOC_BACKUP_REF)
+            BridgeUtils.Say(msg: "Backup location data saved")
+        }
+        else {
+            BridgeUtils.Warn(msg: "Backup location data saved")
+        }
+    }
+    
+    /// Retrieves instance of LocationData
+    public func loadLastValidLocData() -> LocationData {
+        // To retrieve the instance from UserDefaults:
+        if let savedLocationData = UserDefaults.standard.data(forKey: BridgeRef.LOC_BACKUP_REF),
+            let decodedLocation = try? JSONDecoder().decode(LocationData.self, from: savedLocationData) {
+            // Use the retrieved location data
+            BridgeUtils.Say(msg: "🌎 Most recent location backed up: consent=\(decodedLocation.consent), admin=\(decodedLocation.admin_area), locality=\(decodedLocation.locality)")
+            return decodedLocation
+        } else {
+            BridgeUtils.Warn(msg: "🌎 Failed to backup most recent location")
+        }
+        
+        return LocationData()
+    }
+    
+    
+    /* ---------- GET ---------- */
     /// Get CLAuthorizationStatus location consent value
     private func getLocAuthStatus() -> CLAuthorizationStatus {
         var locationAuthorizationStatus : CLAuthorizationStatus
@@ -203,13 +215,13 @@ public class Profile: NSObject, CLLocationManagerDelegate {
     func getLocationPropertyValue(labelName: String, property: String?) -> String? {
         // TODO: Work out the tabs by string length..?
         if let checkedValue = property {
-            if(Profile.outputtingLocationInfo) {
+            if(outputtingLocationInfo) {
                 BridgeUtils.Say(msg: "📍👍 \(labelName): \(checkedValue)")
             }
             return checkedValue
         }
         else {
-            if(Profile.outputtingLocationInfo) {
+            if(outputtingLocationInfo) {
                 BridgeUtils.Say(msg: "📍👎 \(labelName): [UNAVAILABLE]")
             }
             return nil
@@ -221,21 +233,19 @@ public class Profile: NSObject, CLLocationManagerDelegate {
         // TODO: Work out the tabs by string length..?
         if let checkedValue = property {
             for prop in property! {
-                if(Profile.outputtingLocationInfo) {
+                if(outputtingLocationInfo) {
                     BridgeUtils.Say(msg: "📍👍 \(labelName): \(prop)")
                 }
             }
             return checkedValue
         }
         else {
-            if(Profile.outputtingLocationInfo) {
+            if(outputtingLocationInfo) {
                 BridgeUtils.Say(msg: "📍👎 \(labelName): [UNAVAILABLE]")
             }
             return nil
         }
     }
-   
-    
     
     /// Creates and returns new LocationData from current static singleton that doesn't retain its memory references (clears all if NONE consent)
     public func getClonedAndCleanedLocation() -> LocationData {
@@ -268,6 +278,47 @@ public class Profile: NSObject, CLLocationManagerDelegate {
         return newLocData
     }
     
+    /// Manually call for a location data (will trigger consent request if not confirmed yet!) TODO: Not sure what this actually is????
+    private func requestLocationWithChecks() {
+        if(locationState != .CHECKING) {
+            updateLocState(newState: .CHECKING)
+            locManager.requestLocation()
+        }
+        else {
+            BridgeUtils.Say(msg: "Ignoring request location as LocationState == CHECKING")
+        }
+    }
+    
+    // Cnecks is consented Ad ID exists and returns value
+    func getAdId() -> String! {
+        // Get Advertising ID (IDFA) // TODO: add proper IDFA alternative here if we don't have Ad ID
+        let advertisingIdentifier: UUID = ASIdentifierManager().advertisingIdentifier
+        return advertisingIdentifier.uuidString != BridgeRef.ZERO_AD_ID ? advertisingIdentifier.uuidString : nil
+    }
+    
+    
+    /* ---------- SET ---------- */
+    /// Trigger callback with consent type to update Unity
+    public func sendConsentUpdateToUnity(lc: BridgeRef.LocationConsent) {
+        let rawValue = lc.rawValue
+        if let onConsentTypeConfirmed = bridge.onConsentTypeConfirmed {
+            onConsentTypeConfirmed(BridgeUtils.charPointerConverter(rawValue))
+        } else {
+            print("Error: onConsentTypeConfirmed is nil")
+        }
+    }
+    
+    /// Updates the fetching state of location data
+    public func updateLocState(newState: LocationState) {
+        locationState = newState
+        
+        if(outputtingLocationInfo) {
+            BridgeUtils.Say(msg: "🗣️ Updated location state to: \(newState.rawValue)")
+        }
+    }
+    
+    
+    
     /* ---------- Location Manager Callback ---------- */
     /// Location Manager callback: didChangeAuthorization
     public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -276,7 +327,7 @@ public class Profile: NSObject, CLLocationManagerDelegate {
         if status == .authorizedWhenInUse || status == .authorizedAlways {
             
             // If something changed and not already checking, checking again...
-            if(Profile.locationState != .CHECKING) {
+            if(locationState != .CHECKING) {
                 tag = "Not CHECKING (so updating again...)"
                 doTaskAfterLocAuthUpdate(completion: nil)
             } else {
@@ -288,45 +339,11 @@ public class Profile: NSObject, CLLocationManagerDelegate {
         else {
             // The latest change (or first check) showed no valid authorisation: NONE updated
             tag = "Unauthorised, state made UNAVAILABLE, consent made NONE"
-            Profile.updateLocState(newState: LocationState.UNAVAILABLE)
+            updateLocState(newState: LocationState.UNAVAILABLE)
             locData = LocationData(consent: BridgeRef.LocationConsent.NONE.rawValue)
         }
         
         BridgeUtils.Say(msg: "🌎 didChangeAuthorization => \((status as CLAuthorizationStatus).rawValue): \(tag)")
-    }
-    
-    
-    func locSuccess() {
-        print("✅ Profile.locSuccess");
-        let ld = locData
-        if let onLocDataSuccess = bridge.onLocDataSuccess {
-            onLocDataSuccess(ld.consent , ld.state , ld.postcode , ld.country_code , ld.postal_code , ld.admin_area , ld.sub_admin_area , ld.locality , ld.sub_locality)
-            print("Sent: \(ld.consent), \(ld.postal_code), \(ld.country_code)")
-        } else {
-            print("Error: onLocDataSuccess is nil")
-        }
-    }
-    
-    // TODO: Needed anymore?
-    func initWithValue(checkMe: String) -> String  {
-        if checkMe.isEmpty {
-            print("String is empty")
-            return ""
-        } else {
-            print("String is not empty: \(checkMe)")
-            return checkMe
-        }
-    }
-    
-    func locFailure() {
-        print("❌ Profiler.locFailure");
-        let ld = locData
-        if let onLocDataFailure = bridge.onLocDataFailure {
-            onLocDataFailure(ld.consent , ld.state , ld.postcode , ld.country_code , ld.postal_code , ld.admin_area , ld.sub_admin_area , ld.locality , ld.sub_locality)
-            print("Sent: \(ld.consent), \(ld.postal_code), \(ld.country_code)")
-        } else {
-            print("Error: onLocDataFailure is nil")
-        }
     }
     
     /// Location Manager callback: didUpdateLocations
@@ -344,7 +361,7 @@ public class Profile: NSObject, CLLocationManagerDelegate {
             
                 if let error = error {
                     errorMsg = "Reverse geocoding failed with error: \(error.localizedDescription) | Values remain unchanged"
-                    Profile.updateLocState(newState: LocationState.FAILED)
+                    self.updateLocState(newState: LocationState.FAILED)
                     self.locFailure()
                 }
                 else {
@@ -358,38 +375,12 @@ public class Profile: NSObject, CLLocationManagerDelegate {
                         self.locData.sub_admin_area = self.getLocationPropertyValue(labelName: "Sub Admin Area", property: placemark.subAdministrativeArea) ?? ""
                         self.locData.locality = self.getLocationPropertyValue(labelName: "Locality", property: placemark.locality) ?? ""
                         self.locData.sub_locality = self.getLocationPropertyValue(labelName: "Sub Locality", property: placemark.subLocality) ?? ""
-                        
-                        let testingOutput = false
-                        if(testingOutput) {
-//                        print("🌐 => \(location.coordinate.latitude)/\(location.coordinate.longitude)" )
-//                        self.getLocationPropertyValue(labelName: "name", property: placemark.name) ?? "n/a"
-//                        self.getLocationPropertyValue(labelName: "thoroughfare", property: placemark.thoroughfare) ?? "n/a"
-//                        self.getLocationPropertyValue(labelName: "subThoroughfare", property: placemark.subThoroughfare) ?? "n/a"
-//                        self.getLocationPropertyValue(labelName: "locality", property: placemark.locality) ?? "n/a"
-//                        self.getLocationPropertyValue(labelName: "subLocality", property: placemark.subLocality) ?? "n/a"
-//                        self.getLocationPropertyValue(labelName: "administrativeArea", property: placemark.administrativeArea) ?? "n/a"
-//                        self.getLocationPropertyValue(labelName: "subAdministrativeArea", property: placemark.subAdministrativeArea) ?? "n/a"
-//                        self.getLocationPropertyValue(labelName: "postalCode", property: placemark.postalCode) ?? "n/a"
-//                        self.getLocationPropertyValue(labelName: "isoCountryCode", property: placemark.isoCountryCode) ?? "n/a"
-//                        self.getLocationPropertyValue(labelName: "country", property: placemark.country) ?? "n/a"
-//                        self.getLocationPropertyValue(labelName: "inlandWater", property: placemark.inlandWater) ?? "n/a"
-//                        self.getLocationPropertyValue(labelName: "ocean", property: placemark.ocean) ?? "n/a"
-//                        self.getLocationPropertyValue(labelName: "areasOfInterest", property: placemark.areasOfInterest) ?? []
-                        }
-                        
-                        // Update current sessions top-level country code paramter is there is a value
-                        
-                        // TODO: Update Country Code...?
-//                        if let cc = locData?.country_code, !cc.isEmpty {
-//                            self.adView.countryCode = cc
-//                        }
-                        
                         BridgeUtils.Say(msg: "☎️ didUpdateLocations: [admin=\(self.locData.admin_area) | locality=\(self.locData.locality)] | Values have been updated")
                         
                         // Save data instance as most recently validated data
-                        self.saveLatestValidLocData()
+                        self.saveValidLocData()
                         
-                        Profile.updateLocState(newState: LocationState.CHECKED)
+                        self.updateLocState(newState: LocationState.CHECKED)
                         self.locSuccess()
                         return
                     }
@@ -400,24 +391,9 @@ public class Profile: NSObject, CLLocationManagerDelegate {
             }
         } else {
             BridgeUtils.Warn(msg: "☎️ didUpdateLocations: [errorMsg: \(errorMsg ?? "UNKNOWN")]] | Values remain unchanged have been updated")
-            Profile.updateLocState(newState: LocationState.FAILED)
+            updateLocState(newState: LocationState.FAILED)
             locFailure()
             return
-        }
-    }
-    
-    
-    private func saveLatestValidLocData() {
-        
-        // Save the instance to UserDefaults
-        let encoder = JSONEncoder()
-        if let encoded = try? encoder.encode(locData) {
-            let defaults = UserDefaults.standard
-            defaults.set(encoded, forKey: BridgeRef.LOC_BACKUP_REF)
-            BridgeUtils.Say(msg: "Backup location data saved")
-        }
-        else {
-            BridgeUtils.Warn(msg: "Backup location data saved")
         }
     }
     
@@ -445,7 +421,7 @@ public class Profile: NSObject, CLLocationManagerDelegate {
         }
         
         // Need to start pushing these for this round
-        Profile.updateLocState(newState: LocationState.FAILED)
+        updateLocState(newState: LocationState.FAILED)
         locFailure()
     }
     
@@ -459,20 +435,7 @@ public class Profile: NSObject, CLLocationManagerDelegate {
         requestLocationWithChecks()
     }
     
-    public static func getMostRecentLocationData() -> LocationData {
-        
-        // To retrieve the instance from UserDefaults:
-        if let savedLocationData = UserDefaults.standard.data(forKey: BridgeRef.LOC_BACKUP_REF),
-            let decodedLocation = try? JSONDecoder().decode(LocationData.self, from: savedLocationData) {
-            // Use the retrieved location data
-            print( "🌎 Most recent location backed up: admin=\(decodedLocation.admin_area), locality=\(decodedLocation.locality)")
-            return decodedLocation
-        } else {
-            print("🌎 Failed to backup most recent location")
-        }
-        
-        return LocationData()
-    }
+
 }
 
 public class LocationData : Codable {

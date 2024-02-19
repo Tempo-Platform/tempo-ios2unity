@@ -117,6 +117,7 @@ public class BridgeUtils {
         }
     }
     
+    /// Converts String to UnsafePointer for sending string objects to C#
     public static func charPointerConverter(_ paramString: String) -> UnsafePointer<CChar>? {
         return paramString.withCString { cString in
             guard let duplicatedString = strdup(cString) else {

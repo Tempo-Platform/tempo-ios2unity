@@ -1,10 +1,3 @@
-//
-//  UnityBridge.swift
-//  tempo-ios2unity
-//
-//  Created by Stephen Baker on 15/2/2024.
-//
-
 import Foundation
 import CoreLocation
 
@@ -40,7 +33,6 @@ public func sendSomethingToUnity(someInt: Int) {
 
 @_cdecl("requestLocationConsent")
 public func requestLocationConsent() {
-    print("🌎")
     // make location consent request using CoreLocation
     let locationManager = CLLocationManager()
     locationManager.requestWhenInUseAuthorization()
@@ -57,10 +49,22 @@ public func set_OnInitDelegate(delegate: @convention(c) @escaping () -> Void) {
 public func set_OnCountryCodeConfirmedDelegate(delegate: @convention(c) @escaping (UnsafePointer<CChar>?) -> Void) {
     bridgeController.onCountryCodeConfirmed = delegate
 }
+
+@_cdecl("set_OnConsentTypeConfirmedDelegate")
+public func set_OnConsentTypeConfirmedDelegate(delegate: @convention(c) @escaping (UnsafePointer<CChar>?) -> Void) {
+    bridgeController.onConsentTypeConfirmed = delegate
+}
+
+@_cdecl("set_OnAdIdConfirmedDelegate")
+public func set_OnAdIdConfirmedDelegate(delegate: @convention(c) @escaping (UnsafePointer<CChar>?) -> Void) {
+    bridgeController.onAdIdConfirmed = delegate
+}
+
 @_cdecl("set_OnLocDataSuccessDelegate")
 public func set_OnLocDataSuccessDelegate(delegate: @convention(c) @escaping (UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?) -> Void) {
     bridgeController.onLocDataSuccess = delegate
 }
+
 @_cdecl("set_OnLocDataFailureDelegate")
 public func set_OnLocDataFailureDelegate(delegate: @convention(c) @escaping (UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?) -> Void) {
     bridgeController.onLocDataFailure = delegate
@@ -70,7 +74,4 @@ public func set_OnLocDataFailureDelegate(delegate: @convention(c) @escaping (Uns
 public func set_OnSomethingDelegate(delegate: @convention(c) @escaping (UnsafePointer<CChar>?, Int) -> Void) {
     bridgeController.onSomething = delegate
 }
-@_cdecl("set_OnConsentTypeConfirmedDelegate")
-public func set_OnConsentTypeConfirmedDelegate(delegate: @convention(c) @escaping (UnsafePointer<CChar>?, Int) -> Void) {
-    bridgeController.onConsentTypeConfirmed = delegate
-}
+

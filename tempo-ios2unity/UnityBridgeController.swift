@@ -11,35 +11,46 @@ public class UnityBridgeController: NSObject
 {
     var onInit: (() -> Void)?
     var onSomething: ((UnsafePointer<CChar>?, Int) -> Void)?
-    var onConsentTypeConfirmed: ((UnsafePointer<CChar>?, Int) -> Void)?
+    var onConsentTypeConfirmed: ((UnsafePointer<CChar>?) -> Void)?
     var onCountryCodeConfirmed: ((UnsafePointer<CChar>?) -> Void)?
+    var onAdIdConfirmed: ((UnsafePointer<CChar>?) -> Void)?
     var onLocDataSuccess: ((UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?) -> Void)?
     var onLocDataFailure: ((UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?, UnsafePointer<CChar>?) -> Void)?
     
     var profile: Profile?
     var bridge: UnityBridgeController?
+    public var countryCode: String = ""
     
     // First step to set core basic that will ve used throughout session
-    override init() {
-        // Nothing needs to happen here
-    }
+    override init() {   /* Nothing needs to happen here */ }
     
     func initBridge(bridgeController: UnityBridgeController) {
-        print("💥 UnityBridgeController initBridge()")
+        print("💥 UnityBridgeController.initBridge()")
         bridge = bridgeController
+        getCountryCode()
+        onInit?()
+    }
+    
+    func createProfile() {
+        print("💥 UnityBridgeController.createProfile()")
+        profile = Profile(bridgeController: bridge!)
+        getAdId()
+        profile?.doTaskAfterLocAuthUpdate(completion: nil)
+    }
+    
+    func getAdId() {
+        let adId = profile?.getAdId() ?? BridgeRef.ZERO_AD_ID
+        print("💥 UnityBridgeController.getAdId() -> \(adId)")
+        onAdIdConfirmed?(adId)
+    }
+    
+    func getCountryCode() {
+        countryCode = CountryCode.getIsoCountryCode2Digit() ?? ""
+        print("💥 UnityBridgeController.getCountryCode() -> \(countryCode)")
+        onCountryCodeConfirmed?(BridgeUtils.charPointerConverter(countryCode))
     }
     
     func sendSomethingToUnity(someInt: Int) {
-//        let someString: String = "hello"
-//        if let onSomething = bridge?.onSomething {
-//            print("⚡️ something => \(String(describing: charPointerConverter(someString))) + \(someInt)")
-//            onSomething(charPointerConverter(someString), someInt)
-//            print("⚡️ Sent!")
-//        } else {
-//            print("Error: sendSomethingToUnity is nil")
-//        }
-//        
-//        let consentValue = BridgeRef.LocationConsent.NONE.rawValue //"hell2" //
 //        if let onConsentTypeConfirmed = bridge?.onConsentTypeConfirmed {
 //            print("⚡️ consent => \(String(describing: charPointerConverter(consentValue)))")
 //            onConsentTypeConfirmed(charPointerConverter(consentValue), 69)
@@ -47,60 +58,5 @@ public class UnityBridgeController: NSObject
 //        } else {
 //            print("Error: onConsentTypeConfirmed is nil")
 //        }
-//        
-//        DispatchQueue.global().async {
-//            
-//            self.profile?.sendConsentUpdateToUnity(lc: BridgeRef.LocationConsent.NONE)
-//        }
     }
-    
-//    func convertStringtoCChar(myPerfectlyGoodString: String) -> [CChar] {
-//        var cCharArray: [CChar] = []
-//
-//        myPerfectlyGoodString.withCString { cString in
-//            // Iterate through the C string until the null terminator is encountered
-//            var pointer = cString
-//            while pointer.pointee != 0 {
-//                cCharArray.append(pointer.pointee)
-//                pointer = pointer.advanced(by: 1)
-//            }
-//        }
-//
-//        return cCharArray
-//    }
-    
-    func createProfile() {
-        print("💥 UnityBridgeController createProfile()")
-        profile = Profile(bridgeController: bridge!)
-        profile?.doTaskAfterLocAuthUpdate(completion: nil)
-    }
-    
-//    public func charPointerConverter(_ paramString: String) -> UnsafePointer<CChar>? {
-//        return paramString.withCString { cString in
-//            guard let duplicatedString = strdup(cString) else {
-//                return nil
-//            }
-//            return UnsafePointer(duplicatedString)
-//        }
-//    }
-    
-    
-//    /// Checks to make sure object sent through is a valid string
-//    private func charPointerValidator(paramString: UnsafePointer<CChar>?) -> String! {
-//        
-//        guard let paramString else {
-//            print("❌ paramString was null")
-//            return nil
-//        }
-//        
-//        if let validatedString = String(validatingUTF8: paramString ) {
-//            //print("✅ charPointer validated => \(validatedString) <=")
-//            return validatedString
-//        }
-//        else {
-//            print("❌ wrong input format (paramString)")
-//            return nil
-//        }
-//    }
-
 }
