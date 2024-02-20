@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D6650902B82FC9F002A6594 /* CountryCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D66508F2B82FC9F002A6594 /* CountryCode.swift */; };
 		0D68933E2B7D9CE3002EADFD /* tempo_ios2unity.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D68933D2B7D9CE3002EADFD /* tempo_ios2unity.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0D6893452B7D9D16002EADFD /* UnityBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6893442B7D9D16002EADFD /* UnityBridge.swift */; };
 		0D6893472B7D9D31002EADFD /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6893462B7D9D31002EADFD /* Profile.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D66508F2B82FC9F002A6594 /* CountryCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCode.swift; sourceTree = "<group>"; };
 		0D68933A2B7D9CE3002EADFD /* tempo_ios2unity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = tempo_ios2unity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D68933D2B7D9CE3002EADFD /* tempo_ios2unity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tempo_ios2unity.h; sourceTree = "<group>"; };
 		0D6893442B7D9D16002EADFD /* UnityBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnityBridge.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				0D6893462B7D9D31002EADFD /* Profile.swift */,
 				0D68934A2B7DBC60002EADFD /* BridgeRef.swift */,
 				0D68934C2B7DC23B002EADFD /* BridgeUtils.swift */,
+				0D66508F2B82FC9F002A6594 /* CountryCode.swift */,
 			);
 			path = "tempo-ios2unity";
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 				0D6893452B7D9D16002EADFD /* UnityBridge.swift in Sources */,
 				0D68934D2B7DC23B002EADFD /* BridgeUtils.swift in Sources */,
 				0D6893472B7D9D31002EADFD /* Profile.swift in Sources */,
+				0D6650902B82FC9F002A6594 /* CountryCode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
