@@ -3,9 +3,11 @@ import CoreLocation
 
 
 /**
- * Global tools to use within the Tempo SDK module
+ * Global tools to use within the Tempo BL  module
  */
 public class BridgeUtils {
+    
+    public let static VERSION = "0.0.2";
     
     /// Log for URGENT output with 🔴 marker - not to be used in production
     public static func Shout(msg: String) {

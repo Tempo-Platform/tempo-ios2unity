@@ -51,16 +51,16 @@
 		4D518A04CF7DDBCFB12E406F77AB183B /* Pods-tempo-ios2unity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-tempo-ios2unity.release.xcconfig"; sourceTree = "<group>"; };
 		4EE1E24E8544B093A767366426C51123 /* ResourceBundle-tempo-ios2unity-tempo-ios2unity-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-tempo-ios2unity-tempo-ios2unity-Info.plist"; sourceTree = "<group>"; };
 		4F6568820DCBBBB6E8497D1504950980 /* Pods-tempo-ios2unity */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-tempo-ios2unity"; path = Pods_tempo_ios2unity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		506F5DEE4FF14CDBD4DFB8E85F3B7507 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = "tempo-ios2unity/Resources/PrivacyInfo.xcprivacy"; sourceTree = "<group>"; };
+		506F5DEE4FF14CDBD4DFB8E85F3B7507 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = "tempo-ios2unity/Resources/PrivacyInfo.xcprivacy"; sourceTree = "<group>"; };
 		541553164E49F6359F9B5F518109C21A /* CountryCode.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CountryCode.swift; path = "tempo-ios2unity/CountryCode.swift"; sourceTree = "<group>"; };
 		5A7387C37DD1FF84E1A470C2E4999C7B /* UnityBridgeController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UnityBridgeController.swift; path = "tempo-ios2unity/UnityBridgeController.swift"; sourceTree = "<group>"; };
 		5B835C44FF86E141E11EDA6096283C72 /* tempo-ios2unity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "tempo-ios2unity.release.xcconfig"; sourceTree = "<group>"; };
 		645F336B5E375301202C4DBAEEF54813 /* Profile.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Profile.swift; path = "tempo-ios2unity/Profile.swift"; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		75E6F0DA09AC35181FC514BEF51EB5C1 /* tempo-ios2unity */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "tempo-ios2unity"; path = tempo_ios2unity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		75E6F0DA09AC35181FC514BEF51EB5C1 /* tempo_ios2unity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = tempo_ios2unity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FBD71F9F6910C15D66FCE54E3B37557 /* UnityBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UnityBridge.swift; path = "tempo-ios2unity/UnityBridge.swift"; sourceTree = "<group>"; };
-		96F816ED4BF2C3DF705CC2D1057C38B0 /* tempo-ios2unity.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = "tempo-ios2unity.podspec"; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		96F816ED4BF2C3DF705CC2D1057C38B0 /* tempo-ios2unity.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = "tempo-ios2unity.podspec"; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A2DF93563351F69CD42B0F76D716FC73 /* Pods-tempo-ios2unity-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-tempo-ios2unity-acknowledgements.plist"; sourceTree = "<group>"; };
 		AA8795D3222DC36DB79139C7FE724E8A /* tempo-ios2unity-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "tempo-ios2unity-Info.plist"; sourceTree = "<group>"; };
 		B202599643734D368409935F82114FEB /* Pods-tempo-ios2unity-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-tempo-ios2unity-dummy.m"; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				4F6568820DCBBBB6E8497D1504950980 /* Pods-tempo-ios2unity */,
-				75E6F0DA09AC35181FC514BEF51EB5C1 /* tempo-ios2unity */,
+				75E6F0DA09AC35181FC514BEF51EB5C1 /* tempo_ios2unity.framework */,
 				B982D49065E8C0DAEE10FFEB6AA7FF42 /* tempo-ios2unity-tempo-ios2unity */,
 			);
 			name = Products;
@@ -162,12 +162,12 @@
 		C707D1DA747961805024463AD49105E7 /* tempo-ios2unity */ = {
 			isa = PBXGroup;
 			children = (
+				D760C2EE7B0994CC88F4C3F0B22EAAAE /* tempo_ios2unity.h */,
+				506F5DEE4FF14CDBD4DFB8E85F3B7507 /* PrivacyInfo.xcprivacy */,
 				32380299333D43F8E2B6F6616383530B /* BridgeRef.swift */,
 				BB63D01BC73598756930B368390F1561 /* BridgeUtils.swift */,
 				541553164E49F6359F9B5F518109C21A /* CountryCode.swift */,
-				506F5DEE4FF14CDBD4DFB8E85F3B7507 /* PrivacyInfo.xcprivacy */,
 				645F336B5E375301202C4DBAEEF54813 /* Profile.swift */,
-				D760C2EE7B0994CC88F4C3F0B22EAAAE /* tempo_ios2unity.h */,
 				8FBD71F9F6910C15D66FCE54E3B37557 /* UnityBridge.swift */,
 				5A7387C37DD1FF84E1A470C2E4999C7B /* UnityBridgeController.swift */,
 				7A30AC3EA39214FDB481385336188A3E /* Pod */,
@@ -251,7 +251,7 @@
 			);
 			name = "tempo-ios2unity";
 			productName = tempo_ios2unity;
-			productReference = 75E6F0DA09AC35181FC514BEF51EB5C1 /* tempo-ios2unity */;
+			productReference = 75E6F0DA09AC35181FC514BEF51EB5C1 /* tempo_ios2unity.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		B4F4692B97E984C6A86D25FB7C3EA46C /* Pods-tempo-ios2unity */ = {
@@ -433,6 +433,7 @@
 					"@loader_path/Frameworks",
 				);
 				MODULEMAP_FILE = "Target Support Files/tempo-ios2unity/tempo-ios2unity.modulemap";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tempoplatform.tempo-ios2unity";
 				PRODUCT_MODULE_NAME = tempo_ios2unity;
 				PRODUCT_NAME = tempo_ios2unity;
 				SDKROOT = iphoneos;
@@ -531,6 +532,7 @@
 					"@loader_path/Frameworks",
 				);
 				MODULEMAP_FILE = "Target Support Files/tempo-ios2unity/tempo-ios2unity.modulemap";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tempoplatform.tempo-ios2unity";
 				PRODUCT_MODULE_NAME = tempo_ios2unity;
 				PRODUCT_NAME = tempo_ios2unity;
 				SDKROOT = iphoneos;
