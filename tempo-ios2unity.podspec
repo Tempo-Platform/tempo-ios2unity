@@ -11,7 +11,7 @@ Pod::Spec.new do |spec|
   spec.author           = { 'Tempo Engineering' => 'development@tempoplatform.com' }
   spec.license          = { :type => 'MIT', :file => 'LICENSE' }
   spec.homepage         = 'https://github.com/Tempo-Platform/tempo-ios2unity'
-  spec.readme           = 'https://github.com/Tempo-Platform/tempo-ios2unity/blob/main/README.md'
+  #spec.readme           = 'https://github.com/Tempo-Platform/tempo-ios2unity/blob/main/README.md'
   spec.source           = { :git => 'https://github.com/Tempo-Platform/tempo-ios2unity.git', :tag => spec.version.to_s }
   spec.summary          = 'Tempo Branded Levels SDK to display in-game content'
 
@@ -24,5 +24,5 @@ Pod::Spec.new do |spec|
   
   spec.tvos.pod_target_xcconfig  = { 'EXCLUDED_ARCHS[sdk=appletvsimulator*]' => 'arm64', }
   spec.tvos.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=appletvsimulator*]' => 'arm64' }
-  spec.pod_target_xcconfig       = { 'PRODUCT_BUNDLE_IDENTIFIER': 'com.tempoplatform.bl' }
+  spec.pod_target_xcconfig       = { 'PRODUCT_BUNDLE_IDENTIFIER': 'com.tempoplatform.tempo-ios2unity' }
 end
