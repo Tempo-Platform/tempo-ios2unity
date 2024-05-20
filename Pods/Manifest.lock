@@ -1,0 +1,16 @@
+PODS:
+  - tempo-ios2unity (0.0.1)
+
+DEPENDENCIES:
+  - tempo-ios2unity (from `./`)
+
+EXTERNAL SOURCES:
+  tempo-ios2unity:
+    :path: "./"
+
+SPEC CHECKSUMS:
+  tempo-ios2unity: a737034366c8373c358f50e9c7116d58bae61d7d
+
+PODFILE CHECKSUM: 85b9a3fc5b05019c078891c0aa8fa0e15cb8bdb6
+
+COCOAPODS: 1.13.0

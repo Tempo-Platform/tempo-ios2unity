@@ -1,0 +1,6 @@
+framework module tempo_ios2unity {
+  umbrella header "tempo-ios2unity-umbrella.h"
+
+  export *
+  module * { export * }
+}
