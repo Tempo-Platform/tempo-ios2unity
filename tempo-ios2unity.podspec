@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name             = 'tempo-ios2unity'
-  spec.version          = '0.0.1'
+  spec.version          = '0.0.2'
   spec.swift_version    = '5.6'
   spec.author           = { 'Tempo Engineering' => 'development@tempoplatform.com' }
   spec.license          = { :type => 'MIT', :file => 'LICENSE' }

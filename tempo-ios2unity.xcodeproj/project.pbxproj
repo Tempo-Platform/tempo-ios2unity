@@ -133,6 +133,7 @@
 				0D6893362B7D9CE3002EADFD /* Sources */,
 				0D6893372B7D9CE3002EADFD /* Frameworks */,
 				0D6893382B7D9CE3002EADFD /* Resources */,
+				604C4250EE33EC056897AEA5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -190,6 +191,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		604C4250EE33EC056897AEA5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-tempo-ios2unity/Pods-tempo-ios2unity-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-tempo-ios2unity/Pods-tempo-ios2unity-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-tempo-ios2unity/Pods-tempo-ios2unity-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		C9AB965DC543A847876FDB65 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
