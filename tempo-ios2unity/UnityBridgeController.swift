@@ -62,4 +62,9 @@ public class UnityBridgeController: NSObject
             print("Error: onSomething is nil")
         }
     }
+    
+    /// Test function to send back String/Int to Unity
+    func requestLocationConsent() {
+        profile?.requestLocationConsentNowAsTesting()
+    }
 }
