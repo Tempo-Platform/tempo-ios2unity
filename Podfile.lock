@@ -1,5 +1,5 @@
 PODS:
-  - tempo-ios2unity (0.0.2)
+  - tempo-ios2unity (0.0.2-rc.0)
 
 DEPENDENCIES:
   - tempo-ios2unity (from `./`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "./"
 
 SPEC CHECKSUMS:
-  tempo-ios2unity: 36a7edcc0214e9cfd6d755e065ec625418484ce3
+  tempo-ios2unity: 4249a3fa6f8cb0214c697148db61a97f7c150a80
 
 PODFILE CHECKSUM: d56e2efb3032aa6ef6faa7daa2f4c3656687660a
 
