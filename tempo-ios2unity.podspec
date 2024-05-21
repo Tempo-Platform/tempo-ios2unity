@@ -3,7 +3,7 @@ Pod::Spec.new do |spec|
   spec.version          = '0.0.2'
   spec.swift_version    = '5.6'
   spec.author           = { 'Tempo Engineering' => 'development@tempoplatform.com' }
-  spec.license          = { :type => 'MIT', :file => 'LICENSE' }
+  spec.license          = { :type => 'MIT', :file => 'LICENSE.txt' }
   spec.homepage         = 'https://github.com/Tempo-Platform/tempo-ios2unity'
   spec.source           = { :git => 'https://github.com/Tempo-Platform/tempo-ios2unity.git', :tag => spec.version.to_s }
   spec.summary          = 'Tempo Branded Levels SDK to display in-game content'
