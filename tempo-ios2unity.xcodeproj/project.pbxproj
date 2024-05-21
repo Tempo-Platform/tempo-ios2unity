@@ -17,6 +17,7 @@
 		0D6893492B7D9DFD002EADFD /* UnityBridgeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6893482B7D9DFD002EADFD /* UnityBridgeController.swift */; };
 		0D68934B2B7DBC60002EADFD /* BridgeRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D68934A2B7DBC60002EADFD /* BridgeRef.swift */; };
 		0D68934D2B7DC23B002EADFD /* BridgeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D68934C2B7DC23B002EADFD /* BridgeUtils.swift */; };
+		675C61FACB90C930CAEBDEDB /* Pods_tempo_ios2unity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD1CF1FC418F61F3BC1D998B /* Pods_tempo_ios2unity.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,9 @@
 		0D6893482B7D9DFD002EADFD /* UnityBridgeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnityBridgeController.swift; sourceTree = "<group>"; };
 		0D68934A2B7DBC60002EADFD /* BridgeRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeRef.swift; sourceTree = "<group>"; };
 		0D68934C2B7DC23B002EADFD /* BridgeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeUtils.swift; sourceTree = "<group>"; };
+		319CCF2D3F491D5849190FB1 /* Pods-tempo-ios2unity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tempo-ios2unity.debug.xcconfig"; path = "Target Support Files/Pods-tempo-ios2unity/Pods-tempo-ios2unity.debug.xcconfig"; sourceTree = "<group>"; };
+		54D59196904B968EE42624E8 /* Pods-tempo-ios2unity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tempo-ios2unity.release.xcconfig"; path = "Target Support Files/Pods-tempo-ios2unity/Pods-tempo-ios2unity.release.xcconfig"; sourceTree = "<group>"; };
+		AD1CF1FC418F61F3BC1D998B /* Pods_tempo_ios2unity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tempo_ios2unity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,12 +42,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				675C61FACB90C930CAEBDEDB /* Pods_tempo_ios2unity.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00C1930FDACC9316057AA8CA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AD1CF1FC418F61F3BC1D998B /* Pods_tempo_ios2unity.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		0D24F8812BFB30A400A1A2A9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +73,7 @@
 				0D68933C2B7D9CE3002EADFD /* tempo-ios2unity */,
 				0D68933B2B7D9CE3002EADFD /* Products */,
 				F9325FA1F9B4F51AA4777C19 /* Pods */,
+				00C1930FDACC9316057AA8CA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -89,6 +103,8 @@
 		F9325FA1F9B4F51AA4777C19 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				319CCF2D3F491D5849190FB1 /* Pods-tempo-ios2unity.debug.xcconfig */,
+				54D59196904B968EE42624E8 /* Pods-tempo-ios2unity.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -111,10 +127,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0D6893412B7D9CE3002EADFD /* Build configuration list for PBXNativeTarget "tempo-ios2unity" */;
 			buildPhases = (
+				544113CE2082876CE04891E6 /* [CP] Check Pods Manifest.lock */,
 				0D6893352B7D9CE3002EADFD /* Headers */,
 				0D6893362B7D9CE3002EADFD /* Sources */,
 				0D6893372B7D9CE3002EADFD /* Frameworks */,
 				0D6893382B7D9CE3002EADFD /* Resources */,
+				F97F46E74B84651464620F4D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -170,6 +188,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		544113CE2082876CE04891E6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-tempo-ios2unity-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F97F46E74B84651464620F4D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-tempo-ios2unity/Pods-tempo-ios2unity-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-tempo-ios2unity/Pods-tempo-ios2unity-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-tempo-ios2unity/Pods-tempo-ios2unity-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0D6893362B7D9CE3002EADFD /* Sources */ = {
@@ -315,6 +375,7 @@
 		};
 		0D6893422B7D9CE3002EADFD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 319CCF2D3F491D5849190FB1 /* Pods-tempo-ios2unity.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -350,6 +411,7 @@
 		};
 		0D6893432B7D9CE3002EADFD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54D59196904B968EE42624E8 /* Pods-tempo-ios2unity.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
