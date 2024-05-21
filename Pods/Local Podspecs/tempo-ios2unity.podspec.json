@@ -7,7 +7,7 @@
   },
   "license": {
     "type": "MIT",
-    "file": "LICENSE.txt"
+    "file": "LICENSE"
   },
   "homepage": "https://github.com/Tempo-Platform/tempo-ios2unity",
   "source": {
@@ -18,7 +18,7 @@
   "platforms": {
     "ios": "11.0"
   },
-  "source_files": "tempo-ios2unity/**/*.{h,m,swift}",
+  "source_files": "tempo-ios2unity/**/*.{h,m,swift,txt}",
   "resource_bundles": {
     "tempo-ios2unity": [
       "tempo-ios2unity/Resources/**/*"
