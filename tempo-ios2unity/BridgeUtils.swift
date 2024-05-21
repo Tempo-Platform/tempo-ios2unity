@@ -7,19 +7,19 @@ import CoreLocation
  */
 public class BridgeUtils {
     
-    public let static VERSION = "0.0.2";
+    public static let VERSION = "0.0.2"
     
     /// Log for URGENT output with 🔴 marker - not to be used in production
     public static func Shout(msg: String) {
         if(BridgeRef.isTesting) {
-            print("🔴 TempoSDK: \(msg)");
+            print("🔴 TempoSDK: \(msg)")
         }
     }
     
     /// Log for URGENT output with 🔴 marker, even when TESTING is on - not to be used in production
     public static func Shout(msg: String, absoluteDisplay: Bool) {
         if (absoluteDisplay) {
-            print("🔴 TempoSDK: \(msg)");
+            print("🔴 TempoSDK: \(msg)")
         } else if (BridgeRef.isTesting) {
             // Nothing - muted
         }
@@ -28,14 +28,14 @@ public class BridgeUtils {
     /// Log for general test  output -, never shows in production
     public static func Say(msg: String) {
         if(BridgeRef.isTesting) {
-            print("🟣 TempoSDK: \(msg)");
+            print("🟣 TempoSDK: \(msg)")
         }
     }
     
     /// Log for general output with - option of toggling production output or off completely
     public static func Say(msg: String, absoluteDisplay: Bool) {
         if (absoluteDisplay) {
-            print("TempoSDK: \(msg)");
+            print("TempoSDK: \(msg)")
         } else if (BridgeRef.isTesting) {
             // Nothing - muted
         }
@@ -44,14 +44,14 @@ public class BridgeUtils {
     /// Log for WARNING output with ⚠️ marker - not to be used in production
     public static func Warn(msg: String) {
         if(BridgeRef.isTesting) {
-            print("⚠️ TempoSDK: \(msg)");
+            print("⚠️ TempoSDK: \(msg)")
         }
     }
     
     /// Log for WARNING output with ⚠️ marker, option of toggling production output or off completely
     public static func Warn(msg: String, absoluteDisplay: Bool) {
         if (absoluteDisplay) {
-            print("⚠️ TempoSDK: \(msg)");
+            print("⚠️ TempoSDK: \(msg)")
         } else if (BridgeRef.isTesting) {
             // Nothing - muted
         }
